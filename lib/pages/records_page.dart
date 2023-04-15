@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:memory_game_flutter/theme.dart';
 
 import '../constants.dart';
 
@@ -14,6 +15,39 @@ class RecordsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Records'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(12),
+        child: ListView.separated(itemBuilder: (BuildContext context, int index){
+          return index == 0 ?
+          Padding(
+            padding: const EdgeInsets.only(top: 36, bottom: 24),
+            child: Center(
+              child: Text(
+                'Modo ${getModo()}',
+                style: const TextStyle(
+                  fontSize: 28,
+                  color: Round6Theme.color,
+                ),
+              ),
+            ),
+          )
+          : ListTile(
+            title: Text(recs[index]),
+            trailing: const Text('X jugadas'),
+            tileColor: Colors.grey[900],
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(15)),
+            ),
+          );
+        },
+        itemCount: recs.length,
+        separatorBuilder: (_, __) => const Divider(color: Colors.transparent),
+      ),
+    )
+    );
   }
 }
