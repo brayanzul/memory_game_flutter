@@ -1,8 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:memory_game_flutter/pages/records_page.dart';
 import 'package:memory_game_flutter/theme.dart';
 
-class Records extends StatelessWidget {
+import '../constants.dart';
+
+class Records extends StatefulWidget {
   const Records({super.key});
+
+  @override
+  State<Records> createState() => _RecordsState();
+}
+
+class _RecordsState extends State<Records> {
+  showRecords(Modo modo) async {
+    await Navigator.push(
+      context, 
+      MaterialPageRoute(
+        builder: (BuildContext context) => RecordsPage(modo: modo),
+      )
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,12 +43,12 @@ class Records extends StatelessWidget {
             ListTile(
               title: const Text('Modo Normal'),
               trailing: const Icon(Icons.chevron_right),
-              onTap: () {},
+              onTap: showRecords(Modo.normal),
             ),
             ListTile(
               title: const Text('Modo Round 6'),
               trailing: const Icon(Icons.chevron_right),
-              onTap: () {},
+              onTap: showRecords(Modo.round6),
             ),
           ],
         ),
